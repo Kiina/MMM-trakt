@@ -18,6 +18,11 @@ Clone this repository:
 ```shell
 git clone https://github.com/Kiina/MM-trakt
 ```
+Go into the directory and run npm install:
+```shell
+cd MM-trakt
+npm install
+```
 Configure the module in your config.js file.
 
 
