@@ -1,7 +1,7 @@
 # Trakt.tv-Module for the MagicMirror
 ### This Project is WIP and currently very basic, if someone wants to help out, contact me or open a pull request
 
-[MagicMirror Project on Github](https://github.com/Kiina/MM-trakt)
+[MagicMirror Project on Github](https://github.com/MichMich/MagicMirror/)
 
 ## Usage
 
