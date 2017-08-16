@@ -1,5 +1,6 @@
 const NodeHelper = require("node_helper");
 const Trakt = require("trakt.tv");
+const moment = require("moment");
 
 module.exports = NodeHelper.create({
     start: function() {
@@ -24,7 +25,7 @@ module.exports = NodeHelper.create({
             return trakt.poll_access(poll);
         }).then(function() {
             trakt.calendars.my.shows({
-                start_date: '2017-08-15',
+                start_date: moment().format("YYYY-MM-DD"),
                 days: days,
                 extended: 'full'
             }).then(shows => {
