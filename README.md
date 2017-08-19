@@ -49,7 +49,6 @@ To run the module, you need to add the following data to your config.js file.
 
 ### Todo
 
-* Save OAuth
 * Better Design
 * Pictures for the shows
 * More configuration options
