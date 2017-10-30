@@ -1,8 +1,7 @@
 {
-  "name": "mm-trakt",
-  "version": "0.1.0",
+  "name": "MMM-trakt",
+  "version": "0.2.0",
   "description": "[MagicMirror Project on Github](https://github.com/MichMich/MagicMirror/)",
-  "main": "trakt.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
