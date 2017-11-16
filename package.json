@@ -7,16 +7,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kiina/MM-trakt.git"
+    "url": "git+https://github.com/Kiina/MMM-trakt.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Kiina/MM-trakt/issues"
+    "url": "https://github.com/Kiina/MMM-trakt/issues"
   },
-  "homepage": "https://github.com/Kiina/MM-trakt#readme",
+  "homepage": "https://github.com/Kiina/MMM-trakt#readme",
   "dependencies": {
-    "trakt.tv": "^5.1.0",
+    "trakt.tv": "^6.0.2",
     "trakt.tv-images": "^5.1.1"
   }
 }
