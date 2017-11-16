@@ -40,7 +40,7 @@ module.exports = NodeHelper.create({
               return trakt.poll_access(poll);
           }).then(function(){
             importtoken = trakt.export_token();
-            fs.writeFile("./modules/trakt/token.json", JSON.stringify(importtoken), "utf8", function (err,data) {
+            fs.writeFile("./modules/MMM-trakt/token.json", JSON.stringify(importtoken), "utf8", function (err,data) {
               if (err) {
                 return console.log(err);
               }
