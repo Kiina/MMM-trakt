@@ -1,6 +1,6 @@
 /* global Module */
 
-Module.register("trakt", {
+Module.register("MMM-trakt", {
 	defaults: {
 			updateInterval: 60 * 60 * 1000, //every 60 minutes
 			initialLoadDelay: 0,
