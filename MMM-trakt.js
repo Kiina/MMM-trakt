@@ -27,7 +27,7 @@ Module.register("MMM-trakt", {
         } else {
             var wrapper = document.createElement("table");
             var heading = wrapper.insertRow(0);
-            wrapper.className = "small tableTrakt";
+            wrapper.className = "small";
             heading.insertCell(0).outerHTML = '<th class="ColLeft">Série</th>';
             heading.insertCell(1).outerHTML = '<th class="ColCenter">Proximos</th>';
             heading.insertCell(2).outerHTML = '<th class="ColRight">Nome Episódio</th>';
