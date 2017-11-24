@@ -32,14 +32,16 @@ To run the module, you need to add the following data to your ` ~/MagicMirror/co
 
 ```
 {
-  module: 'MMM-trakt',
-  position: 'top_center', // you may choose any location
-  config: {
-    client_id: 'YOUR_API_CLIENT_ID',
-    client_secret: 'YOUR_API_CLIENT_SECRET',
-    days: 1 // optional, default: 1
-  }
-}
+    module: "MM-trakt", position: "top_left", header: "Trakt - Series",
+        config: {
+            client_id: "private_id",
+            client_secret: "secret_id",
+            days: 2,
+            username: 'username',
+            id_lista: "idlist",  //example: "2896375"
+            type: "shows" 
+        }
+},
 ```
 
 [Trakt.tv]:(https://trakt.tv/)
