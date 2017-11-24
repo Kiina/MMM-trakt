@@ -6,6 +6,14 @@ Module.register("MMM-trakt", {
 			initialLoadDelay: 0,
 			days: 1
 	},
+	getTranslations() {
+		return {
+			en: 'translations/en.json',
+			de: 'translations/de.json',
+			kr: 'translations/kr.json',
+			pt: 'translations/pt.json'
+		};
+	},
 	getScripts: function() {
 		return ["moment.js"];
 	},
@@ -25,11 +33,11 @@ Module.register("MMM-trakt", {
 		else {
 			var wrapper = document.createElement("table");
 			var heading = wrapper.insertRow(0);
-			heading.insertCell(0).outerHTML = '<th>Show Title</th>';
-			heading.insertCell(1).outerHTML = '<th>Season</th>';
-			heading.insertCell(2).outerHTML = '<th>Number</th>';
-			heading.insertCell(3).outerHTML = '<th>Episode Title</th>';
-			heading.insertCell(4).outerHTML = '<th>Airtime</th>';
+			heading.insertCell(0).outerHTML = '<th>' + this.translate('TITLE') + '</th>';
+			heading.insertCell(1).outerHTML = '<th>' + this.translate('SEASON') + '</th>';
+			heading.insertCell(2).outerHTML = '<th>' + this.translate('NUMBER') + '</th>';
+			heading.insertCell(3).outerHTML = '<th>' + this.translate('EPTITLE') + '</th>';
+			heading.insertCell(4).outerHTML = '<th>' + this.translate('TIME') + '</th>';
 			for(var show in this.traktData){
 				var tableHeader = wrapper.insertRow(-1);
 				var airtime = moment.utc(this.traktData[show].episode.first_aired).local().format("D.M hh:mm");
