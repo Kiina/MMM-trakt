@@ -118,4 +118,5 @@ Module.register("MMM-trakt", {
             self.updateTrakt();
         }, nextLoad);
     }
+
 });
