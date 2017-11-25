@@ -26,7 +26,7 @@ Clone the repository into your MagicMirror's modules folder, and install depende
 ```
 
 
-## Configuration
+## Using the Module
 
 To run the module, you need to add the following data to your ` ~/MagicMirror/config/config.js` file:
 
@@ -43,6 +43,14 @@ To run the module, you need to add the following data to your ` ~/MagicMirror/co
         }
 },
 ```
+
+## Configuration
+
+| Option            | Description
+| ----------------- | -----------
+| `id_lista`        | To get the id_list you need to go to[This Link](https://trakt.docs.apiary.io/#reference/users/lists/get-a-user's-custom-lists?console=1), using the username and client_id in the UI Parameters and Headers, and in the Response, search for the List "ids" and then "trakt" value.
+
+
 
 [Trakt.tv]:(https://trakt.tv/)
 [application]: (https://trakt.tv/oauth/applications/new)

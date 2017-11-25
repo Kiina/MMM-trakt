@@ -19,6 +19,7 @@ module.exports = NodeHelper.create({
             api_url: null,
         };
         const trakt = new Trakt(options);
+
         function importoldtoken() {
             return new Promise(function (fulfill, reject) {
                 try {
@@ -29,6 +30,7 @@ module.exports = NodeHelper.create({
                 }
             });
         }
+
         importoldtoken().catch(function () {
             return trakt.get_codes().then(function (poll) {
                 console.log('Trakt Access Code: ' + poll.user_code);
@@ -53,19 +55,22 @@ module.exports = NodeHelper.create({
                     username: username,
                     id: id_lista,
                     type: type
-                }).then(dados => {
+                }).then(data => {
 
-                    var series=[];
-                    for (let h = 0; h < dados.length; h++) {
+                    var series = [];
+                    for (let h = 0; h < data.length; h++) {
                         trakt.shows.progress.watched({
-                            id: dados[h].show.ids.slug
+                            id: data[h].show.ids.slug
 
-                        }).then(dat => {
-                            var diff = (dat.aired - dat.completed);
+                        }).then(info => {
+                            var diff = (info.aired - info.completed);
 
-                            if(diff != 0){ series.push({nome : dados[h].show.title, dif: diff, nextEp: dat.next_episode.title});
+                            if (diff != 0) {
+                                series.push({nome: data[h].show.title, dif: diff, nextEp: info.next_episode.title});
 
-                            }else{ series.push({nome : dados[h].show.title, dif: diff, nextEp: ""}); }
+                            } else {
+                                series.push({nome: data[h].show.title, dif: diff, nextEp: ""});
+                            }
 
                             self.sendSocketNotification("UNWATCHED", {
                                 eps: series

@@ -6,6 +6,17 @@ Module.register("MMM-trakt", {
         initialLoadDelay: 0,
         days: 1
     },
+    getTranslations() {
+        return {
+            en: 'translations/en.json',
+            de: 'translations/de.json',
+            kr: 'translations/kr.json',
+            pt: 'translations/pt.json'
+        };
+    },
+    getStyles: function () {
+        return ["MMM-Trakt.css"];
+    },
     getScripts: function () {
         return ["moment.js"];
     },
@@ -14,30 +25,30 @@ Module.register("MMM-trakt", {
         moment.locale(config.language);
         this.traktData = {};
         this.traktxCode;
-        this.dados = {};
+        this.SeriesData = {};
         this.loaded = false;
         this.scheduleUpdate(this.config.initialLoadDelay);
         //asd
     },
     getDom: function () {
-        if (Object.keys(this.dados).length === 0) {
+        if (Object.keys(this.SeriesData).length === 0) {
             var wrapper = document.createElement("div");
             wrapper.innerHTML = "Please enter the following on https://trakt.tv/activate: " + this.traktCode;
             wrapper.className = "small";
         } else {
             var wrapper = document.createElement("table");
             var heading = wrapper.insertRow(0);
-            wrapper.className = "small tableTrakt";
-            heading.insertCell(0).outerHTML = '<th class="ColLeft">Série</th>';
-            heading.insertCell(1).outerHTML = '<th class="ColCenter">Proximos</th>';
-            heading.insertCell(2).outerHTML = '<th class="ColRight">Nome Episódio</th>';
-            this.dados.sort(function (a, b) {
+            wrapper.className = "small tabelaTrakt";
+            heading.insertCell(0).outerHTML = '<th class="ColLeft">' + this.translate('TITLE') + '</th>';
+            heading.insertCell(1).outerHTML = '<th class="ColCenter">' + this.translate('TOSEE') + '</th>';
+            heading.insertCell(2).outerHTML = '<th class="ColRight">' + this.translate('EPTITLE') + '</th>';
+            this.SeriesData.sort(function (a, b) {
                 return parseFloat(a.dif) - parseFloat(b.dif);
             });
             var aux = [];
-            for (var i = 0; i < this.dados.length; i++) {
-                if (this.dados[i].dif != 0) {
-                    aux.push(this.dados[i]);
+            for (var i = 0; i < this.SeriesData.length; i++) {
+                if (this.SeriesData[i].dif != 0) {
+                    aux.push(this.SeriesData[i]);
                 }
             }
 
@@ -46,24 +57,21 @@ Module.register("MMM-trakt", {
 
                 title = this.shorten(aux[i].nextEp, 20);
 
-                tableHeader.insertCell(0).outerHTML = '<td class="ColLeft">' +aux[i].nome +'</td>';
-                tableHeader.insertCell(1).outerHTML = '<td class="ColCenter">'+ aux[i].dif + '</td>';
-                tableHeader.insertCell(2).outerHTML = '<td class="ColRight">'+ title + '</td>';
+                tableHeader.insertCell(0).outerHTML = '<td class="ColLeft">' + aux[i].nome + '</td>';
+                tableHeader.insertCell(1).outerHTML = '<td class="ColCenter">' + aux[i].dif + '</td>';
+                tableHeader.insertCell(2).outerHTML = '<td class="ColRight">' + title + '</td>';
 
             }
 
         }
         return wrapper;
     },
-
     shorten: function (string, maxLength) {
         if (string.length > maxLength) {
             return string.slice(0, maxLength) + "&hellip;";
         }
-
         return string;
     },
-
     updateTrakt: function () {
         if (this.config.client_id === "") {
             Log.error("Trakt: client_id not set");
@@ -91,7 +99,7 @@ Module.register("MMM-trakt", {
         }
         if (notification === "UNWATCHED") {
             //console.log(payload.eps);
-            this.dados = payload.eps;
+            this.SeriesData = payload.eps;
             this.updateDom();
         }
         if (notification === "OAuth") {
