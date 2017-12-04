@@ -1,7 +1,9 @@
 {
   "TITLE": "Série",
-  "SEASON": "Season",
-  "NUMBER": "Proximos",
+
+  "SEASON": "Temporada",
+  "NUMBER": "Número",
+  "TOSEE": "Proximos",
   "EPTITLE": "Nome Episódio",
-  "TIME": "Airtime"
+  "TIME": "Data Lançamento"
 }

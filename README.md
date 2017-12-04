@@ -26,21 +26,31 @@ Clone the repository into your MagicMirror's modules folder, and install depende
 ```
 
 
-## Configuration
+## Using the Module
 
 To run the module, you need to add the following data to your ` ~/MagicMirror/config/config.js` file:
 
 ```
 {
-  module: 'MMM-trakt',
-  position: 'top_center', // you may choose any location
-  config: {
-    client_id: 'YOUR_API_CLIENT_ID',
-    client_secret: 'YOUR_API_CLIENT_SECRET',
-    days: 1 // optional, default: 1
-  }
-}
+    module: "MM-trakt", position: "top_left", header: "Trakt - Series",
+        config: {
+            client_id: "private_id",
+            client_secret: "secret_id",
+            days: 2,
+            username: 'username',
+            id_lista: "idlist",  //example: "2896375"
+            type: "shows" 
+        }
+},
 ```
+
+## Configuration
+
+| Option            | Description
+| ----------------- | -----------
+| `id_lista`        | To get the id_list you need to go to[This Link](https://trakt.docs.apiary.io/#reference/users/lists/get-a-user's-custom-lists?console=1), using the username and client_id in the UI Parameters and Headers, and in the Response, search for the List "ids" and then "trakt" value.
+
+
 
 [Trakt.tv]:(https://trakt.tv/)
 [application]: (https://trakt.tv/oauth/applications/new)

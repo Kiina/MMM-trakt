@@ -1,0 +1,27 @@
+
+th {
+    font-size: 20px !important;
+    color: rgb(41, 192, 255) !important;
+    padding-bottom: 5px;
+}
+
+td {
+    margin-left: 10px;
+    font-size: 20px;
+    line-height: 25px;
+}
+
+.ColLeft {
+    text-align: left;
+    font-size: 21px;
+    color: #fff;
+}
+
+.ColCenter {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.87);
+}
+
+.ColRight {
+    text-align: right;
+}
