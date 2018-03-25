@@ -38,6 +38,8 @@ module.exports = NodeHelper.create({
                   code: poll.user_code
               });
               return trakt.poll_access(poll);
+          }).catch(error => {
+            console.log(error.message);
           }).then(function(){
             importtoken = trakt.export_token();
             fs.writeFile("./modules/MMM-trakt/token.json", JSON.stringify(importtoken), "utf8", function (err,data) {
