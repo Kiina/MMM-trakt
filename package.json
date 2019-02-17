@@ -1,6 +1,6 @@
 {
   "name": "MMM-trakt",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "[MagicMirror Project on Github](https://github.com/MichMich/MagicMirror/)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/Kiina/MMM-trakt#readme",
   "dependencies": {
-    "trakt.tv": "^6.0.2",
-    "trakt.tv-images": "^5.1.1"
+    "trakt.tv": "^7.1.0",
+    "trakt.tv-images": "^5.2.0"
   }
 }

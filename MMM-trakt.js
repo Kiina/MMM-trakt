@@ -15,6 +15,9 @@ Module.register("MMM-trakt", {
 			pt: 'translations/pt.json'
 		};
 	},
+	getStyles: function () {
+		return ["MMM-trakt.css"];
+	},
 	getScripts: function() {
 		return ["moment.js"];
 	},
