@@ -60,8 +60,12 @@ module.exports = NodeHelper.create({
                 self.sendSocketNotification("SHOWS", {
                     shows: shows
                 });
+            }).catch(error => {
+              self.errorLog(error, new Error());
             });
           });
+        }).catch(error => {
+          self.errorLog(error, new Error());
         });
     },
     socketNotificationReceived: function(notification, payload) {
