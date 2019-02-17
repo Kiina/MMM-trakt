@@ -33,25 +33,25 @@ module.exports = NodeHelper.create({
 
         importoldtoken().catch(function(){
           return trakt.get_codes().then(function(poll) {
-              console.log('Trakt Access Code: ' + poll.user_code);
+              self.log('Trakt Access Code: ' + poll.user_code);
               self.sendSocketNotification("OAuth", {
                   code: poll.user_code
               });
               return trakt.poll_access(poll);
           }).catch(error => {
-            console.log(error.message);
+            self.errorLog(error, new Error());
           }).then(function(){
             importtoken = trakt.export_token();
             fs.writeFile("./modules/MMM-trakt/token.json", JSON.stringify(importtoken), "utf8", function (err,data) {
               if (err) {
-                return console.log(err);
+                return self.errorLog(err, new Error());
               }
             });
           });
         }).then(function(){
             trakt.import_token(importtoken).then(newTokens => {
-            console.log(importtoken);
-            console.log(trakt);
+            self.log(importtoken);
+            self.debugLog(trakt);
             trakt.calendars.my.shows({
                 start_date: moment().format("YYYY-MM-DD"),
                 days: days,
@@ -65,8 +65,21 @@ module.exports = NodeHelper.create({
         });
     },
     socketNotificationReceived: function(notification, payload) {
+        this.debug = payload.debug;
         if (notification === "PULL") {
             this.createFetcher(payload.client_id, payload.client_secret, payload.days);
         }
-    }
+    },
+    log: function (msg) {
+      console.log("[" + (new Date(Date.now())).toLocaleTimeString() + "] - " + this.name + " - : ", msg);
+    },
+    debugLog: function (msg) {
+      if (this.debug) {
+        console.log("[" + (new Date(Date.now())).toLocaleTimeString() + "] - DEBUG - " + this.name + " - : ", msg);
+      }
+    },
+	errorLog: function (error, errorObject) {
+		var stack = errorObject.stack.toString().split(/\r\n|\n/); // Line number
+		console.log("[" + (new Date(Date.now())).toLocaleTimeString() + "] - ERROR " + this.name + " : ", error, " - [" + stack[1] + "]");
+	}
 });
