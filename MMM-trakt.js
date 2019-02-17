@@ -4,7 +4,8 @@ Module.register("MMM-trakt", {
 	defaults: {
 			updateInterval: 60 * 60 * 1000, //every 60 minutes
 			initialLoadDelay: 0,
-			days: 1
+			days: 1,
+			debug: false
 	},
 	getTranslations() {
 		return {
@@ -13,6 +14,9 @@ Module.register("MMM-trakt", {
 			kr: 'translations/kr.json',
 			pt: 'translations/pt.json'
 		};
+	},
+	getStyles: function () {
+		return ["MMM-trakt.css"];
 	},
 	getScripts: function() {
 		return ["moment.js"];
@@ -52,27 +56,28 @@ Module.register("MMM-trakt", {
 	},
 	updateTrakt: function() {
 		if (this.config.client_id === "") {
-			Log.error("Trakt: client_id not set");
+			this.log("ERROR - Trakt: client_id not set");
 			return;
 		}
 		if (this.config.client_secret === "") {
-			Log.error("Trakt: client_secret not set");
+			this.log("ERROR - Trakt: client_secret not set");
 			return;
 		}
 		this.sendSocketNotification("PULL", {
 			client_id: this.config.client_id,
 			client_secret: this.config.client_secret,
-			days: this.config.days
+			days: this.config.days,
+			debug: this.config.debug
 		});
 	},
 	socketNotificationReceived: function(notification, payload) {
 		if (notification === "SHOWS") {
-			console.log(payload.shows);
+			this.debugLog(payload.shows);
 			this.traktData = payload.shows;
 			this.updateDom();
 		}
 		if (notification === "OAuth") {
-			console.log(payload.code);
+			this.log(payload.code);
 			this.traktCode = payload.code;
 			this.updateDom();
 		}
@@ -86,5 +91,16 @@ Module.register("MMM-trakt", {
 		setTimeout(function() {
 			self.updateTrakt();
 		}, nextLoad);
+	},
+
+	log: function (msg) {
+		if (this.config.debug) {
+			Log.log("[" + (new Date(Date.now())).toLocaleTimeString() + "] - " + this.name + " - : ", msg);
+		}
+	},
+	debugLog: function (msg) {
+		if (this.config.debug) {
+			Log.log("[" + (new Date(Date.now())).toLocaleTimeString() + "] - DEBUG - " + this.name + " - : ", msg);
+		}
 	}
 });
