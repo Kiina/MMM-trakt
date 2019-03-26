@@ -1,7 +1,10 @@
 {
+  "HEADER": "Tv Shows",
   "TITLE": "Show Title",
   "SEASON": "Season",
   "NUMBER": "Number",
   "EPTITLE": "Episode Title",
-  "TIME": "Airtime"
+  "TIME": "Airtime",
+  "TODAY": "Today",
+  "TOMORROW": "Tomorrow"
 }

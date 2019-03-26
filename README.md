@@ -4,9 +4,9 @@ _This is a WIP with basic functionality. If you'd like to contribute, pull reque
 
 ### Todo
 
-- [ ] CSS
+- [x] CSS
 - [ ] Pictures for the shows
-- [ ] More configuration options
+- [x] More configuration options
 
 
 ### Creating a [Trakt.tv] API [application]
@@ -37,7 +37,17 @@ To run the module, you need to add the following data to your ` ~/MagicMirror/co
   config: {
     client_id: 'YOUR_API_CLIENT_ID',
     client_secret: 'YOUR_API_CLIENT_SECRET',
-    days: 1 // optional, default: 1
+    days: 1, // optional, default: 1
+    styling : {
+        moduleSize: "small", // optional, possible value: (xsmall, small, medium, large, xlarge), default: small
+        daysUntil: false, // optional, shows 'today' and 'tomorrow' insted of date, default: false
+        daysUntilFormat: "hh:mm", // optional, default: "hh:mm", time format after 'today'. Leave empty ("") to hide, possible values: https://momentjs.com/docs/#/displaying/format/
+        dateFormat: "D.M hh:mm", // optional, default: "D.M hh:mm", possible values: https://momentjs.com/docs/#/displaying/format/
+        showEpisodeTitle: true, // optional, default: true
+        showHeader: true, // optional, default: true
+        headerText: undefined // optional, override header text. default: undefined
+    },
+    debug: false // optional, default: false
   }
 }
 ```
