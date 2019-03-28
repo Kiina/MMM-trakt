@@ -21,7 +21,8 @@ Module.register("MMM-trakt", {
 			en: 'translations/en.json',
 			de: 'translations/de.json',
 			kr: 'translations/kr.json',
-			pt: 'translations/pt.json'
+			pt: 'translations/pt.json',
+			sv: 'translations/sv.json'
 		};
 	},
 	getStyles: function () {
@@ -33,6 +34,7 @@ Module.register("MMM-trakt", {
 	start: function() {
 		Log.info("Starting module: " + this.name);
 		moment.locale(config.language);
+		this.config.styling = { ...this.defaults.styling, ...this.config.styling }
 		this.traktData = {};
 		this.traktCode;
 		this.loaded = false;
@@ -78,7 +80,8 @@ Module.register("MMM-trakt", {
         // Title
         if (this.config.styling.showEpisodeTitle) {
           let titleCell = tableRow.insertCell()
-          titleCell.innerHTML = '\'' + this.traktData[show].episode.title + '\''
+          const episodeTitle = this.traktData[show].episode.title
+          titleCell.innerHTML = episodeTitle === null ? '' : '\'' + episodeTitle + '\''
           titleCell.className = "traktTitle";
         }
         // Airtime
