@@ -79,7 +79,8 @@ Module.register("MMM-trakt", {
         // Title
         if (this.config.styling.showEpisodeTitle) {
           let titleCell = tableRow.insertCell()
-          titleCell.innerHTML = '\'' + this.traktData[show].episode.title + '\''
+          const episodeTitle = this.traktData[show].episode.title
+          titleCell.innerHTML = episodeTitle === null ? '' : '\'' + episodeTitle + '\''
           titleCell.className = "traktTitle";
         }
         // Airtime
