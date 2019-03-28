@@ -21,7 +21,8 @@ Module.register("MMM-trakt", {
 			en: 'translations/en.json',
 			de: 'translations/de.json',
 			kr: 'translations/kr.json',
-			pt: 'translations/pt.json'
+			pt: 'translations/pt.json',
+			sv: 'translations/sv.json'
 		};
 	},
 	getStyles: function () {
