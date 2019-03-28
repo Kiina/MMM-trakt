@@ -33,6 +33,7 @@ Module.register("MMM-trakt", {
 	start: function() {
 		Log.info("Starting module: " + this.name);
 		moment.locale(config.language);
+		this.config.styling = { ...this.defaults.styling, ...this.config.styling }
 		this.traktData = {};
 		this.traktCode;
 		this.loaded = false;
