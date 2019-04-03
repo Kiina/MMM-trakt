@@ -45,7 +45,7 @@ Module.register("MMM-trakt", {
 
 	getDom: function() {
     var wrapper = document.createElement('div')
-    if (Object.keys(this.traktData).length === 0 && this.traktCode !== undefined) {
+    if (Object.keys(this.traktData).length === 0 && this.traktCode === undefined) {
       wrapper.innerHTML = 'Error loading module. Please check the logs.'
     } else if (Object.keys(this.traktData).length === 0) {
       wrapper.innerHTML = 'Please enter the following on https://trakt.tv/activate: ' + this.traktCode
