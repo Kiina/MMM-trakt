@@ -34,6 +34,7 @@ To run the module, you need to add the following data to your ` ~/MagicMirror/co
 {
   module: 'MMM-trakt',
   position: 'top_center', // you may choose any location
+  header: 'TV-Shows', // optional
   config: {
     client_id: 'YOUR_API_CLIENT_ID',
     client_secret: 'YOUR_API_CLIENT_SECRET',
@@ -44,8 +45,6 @@ To run the module, you need to add the following data to your ` ~/MagicMirror/co
         daysUntilFormat: "hh:mm", // optional, default: "hh:mm", time format after 'today'. Leave empty ("") to hide, possible values: https://momentjs.com/docs/#/displaying/format/
         dateFormat: "D.M hh:mm", // optional, default: "D.M hh:mm", possible values: https://momentjs.com/docs/#/displaying/format/
         showEpisodeTitle: true, // optional, default: true
-        showHeader: true, // optional, default: true
-        headerText: undefined // optional, override header text. default: undefined
     },
     debug: false // optional, default: false
   }

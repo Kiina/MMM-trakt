@@ -12,8 +12,6 @@ Module.register("MMM-trakt", {
 				daysUntilFormat: "hh:mm",
 				dateFormat: "D.M hh:mm",
 				showEpisodeTitle: true,
-				showHeader: false,
-				headerText: undefined
 			},
 	},
 	getTranslations() {
@@ -40,20 +38,13 @@ Module.register("MMM-trakt", {
 		this.loaded = false;
 		this.scheduleUpdate(this.config.initialLoadDelay);
 	},
+
+	getHeader: function () {
+		return this.data.header;
+	},
+
 	getDom: function() {
     var wrapper = document.createElement('div')
-
-    // Header
-    if (this.config.styling.showHeader) {
-      var header = document.createElement('header')
-      if (this.config.styling.headerText === undefined) {
-        header.innerHTML = this.translate('HEADER')
-      } else {
-        header.innerHTML = this.config.styling.headerText
-      }
-      wrapper.appendChild(header)
-    }
-
     if (Object.keys(this.traktData).length === 0 && this.traktCode !== undefined) {
       wrapper.innerHTML = 'Error loading module. Please check the logs.'
     } else if (Object.keys(this.traktData).length === 0) {
