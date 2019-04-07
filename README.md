@@ -1,6 +1,7 @@
 # [Trakt.tv]-Module for the [MagicMirror](https://github.com/MichMich/MagicMirror/)
-_This is a WIP with basic functionality. If you'd like to contribute, pull requests are welcome!_
+_If you'd like to contribute, pull requests are welcome!_
 
+![Screenshot](screenshot.png)
 
 ### Todo
 
@@ -38,7 +39,7 @@ To run the module, you need to add the following data to your ` ~/MagicMirror/co
   config: {
     client_id: 'YOUR_API_CLIENT_ID',
     client_secret: 'YOUR_API_CLIENT_SECRET',
-    days: 1, // optional, default: 1
+    days: 1, // optional, default: 1. 1 = today's episodes, 2 = today's and tomorrow's, 3 = etc...
     styling : {
         moduleSize: "small", // optional, possible value: (xsmall, small, medium, large, xlarge), default: small
         daysUntil: false, // optional, shows 'today' and 'tomorrow' insted of date, default: false
@@ -49,6 +50,7 @@ To run the module, you need to add the following data to your ` ~/MagicMirror/co
     debug: false // optional, default: false
   }
 }
+
 ```
 
 [Trakt.tv]:(https://trakt.tv/)
