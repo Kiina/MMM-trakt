@@ -40,7 +40,6 @@ Module.register("MMM-trakt", {
     // Schedule update interval for ui.
     var self = this
     setInterval(function () {
-      self.log("Update ui");
       self.updateDom();
     }, 1000 * 10) // 1min
 	},
