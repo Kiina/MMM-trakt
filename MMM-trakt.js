@@ -143,13 +143,6 @@ Module.register("MMM-trakt", {
 		}, delay);
 	},
 
-  startSchedule: function() {
-    setInterval(function () {
-      var self = this;
-      self.updateTrakt();
-    }, this.config.updateInterval)
-  },
-
 	log: function (msg) {
 			Log.log("[" + (new Date(Date.now())).toLocaleTimeString() + "] - " + this.name + " - : ", msg);
 	},
