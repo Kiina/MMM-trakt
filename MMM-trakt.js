@@ -37,6 +37,12 @@ Module.register("MMM-trakt", {
 		this.traktCode;
 		this.loaded = false;
 		this.scheduleUpdate(this.config.initialLoadDelay);
+    // Schedule update interval for ui.
+    var self = this
+    setInterval(function () {
+      self.log("Update ui");
+      self.updateDom();
+    }, 1000 * 10) // 1min
 	},
 
 	getHeader: function () {
@@ -96,19 +102,20 @@ Module.register("MMM-trakt", {
     return wrapper
 	},
 	updateTrakt: function() {
-		if (this.config.client_id === "") {
-			this.log("ERROR - Trakt: client_id not set");
+		var self = this;
+		if (self.config.client_id === "") {
+			self.log("ERROR - client_id not set");
 			return;
 		}
-		if (this.config.client_secret === "") {
-			this.log("ERROR - Trakt: client_secret not set");
+		if (self.config.client_secret === "") {
+			self.log("ERROR - client_secret not set");
 			return;
 		}
 		this.sendSocketNotification("PULL", {
-			client_id: this.config.client_id,
-			client_secret: this.config.client_secret,
-			days: this.config.days,
-			debug: this.config.debug
+			client_id: self.config.client_id,
+			client_secret: self.config.client_secret,
+			days: self.config.days,
+			debug: self.config.debug
 		});
 	},
 	socketNotificationReceived: function(notification, payload) {
@@ -124,20 +131,27 @@ Module.register("MMM-trakt", {
 		}
 	},
 	scheduleUpdate: function(delay) {
-		var nextLoad = this.config.updateInterval;
-		if (typeof delay !== "undefined" && delay >= 0) {
-			nextLoad = delay;
+		if (typeof delay === "undefined" && delay < 0) {
+			delay = 0;
 		}
 		var self = this;
 		setTimeout(function() {
-			self.updateTrakt();
-		}, nextLoad);
+      self.updateTrakt();
+      setInterval(function () {
+        self.updateTrakt();
+      }, self.config.updateInterval)
+		}, delay);
 	},
 
+  startSchedule: function() {
+    setInterval(function () {
+      var self = this;
+      self.updateTrakt();
+    }, this.config.updateInterval)
+  },
+
 	log: function (msg) {
-		if (this.config.debug) {
 			Log.log("[" + (new Date(Date.now())).toLocaleTimeString() + "] - " + this.name + " - : ", msg);
-		}
 	},
 	debugLog: function (msg) {
 		if (this.config.debug) {
