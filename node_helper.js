@@ -53,7 +53,7 @@ module.exports = NodeHelper.create({
             self.log(importtoken);
             self.debugLog(trakt);
             trakt.calendars.my.shows({
-                start_date: moment().format("YYYY-MM-DD"),
+                start_date: moment.utc().format("YYYY-MM-DD"),
                 days: days,
                 extended: 'full'
             }).then(shows => {

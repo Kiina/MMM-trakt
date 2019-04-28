@@ -32,16 +32,16 @@ Module.register("MMM-trakt", {
 	start: function() {
 		Log.info("Starting module: " + this.name);
 		moment.locale(config.language);
-		this.config.styling = { ...this.defaults.styling, ...this.config.styling }
+		this.config.styling = { ...this.defaults.styling, ...this.config.styling };
 		this.traktData = {};
 		this.traktCode;
 		this.loaded = false;
 		this.scheduleUpdate(this.config.initialLoadDelay);
     // Schedule update interval for ui.
-    var self = this
+    var self = this;
     setInterval(function () {
       self.updateDom();
-    }, 1000 * 10) // 1min
+    }, 1000 * 10); // 1min
 	},
 
 	getHeader: function () {
@@ -49,56 +49,56 @@ Module.register("MMM-trakt", {
 	},
 
 	getDom: function() {
-    var wrapper = document.createElement('div')
+    var wrapper = document.createElement('div');
     if (Object.keys(this.traktData).length === 0 && this.traktCode === undefined) {
-      wrapper.innerHTML = 'Error loading module. Please check the logs.'
+      wrapper.innerHTML = 'Error loading module. Please check the logs.';
     } else if (Object.keys(this.traktData).length === 0) {
-      wrapper.innerHTML = 'Please enter the following on https://trakt.tv/activate: ' + this.traktCode
+      wrapper.innerHTML = 'Please enter the following on https://trakt.tv/activate: ' + this.traktCode;
     } else {
-      var table = document.createElement('table')
-      table.className = this.config.styling.moduleSize + " traktHeader"
+      var table = document.createElement('table');
+      table.className = this.config.styling.moduleSize + " traktHeader";
       for (var show in this.traktData) {
-        var tableRow = table.insertRow(-1)
-        tableRow.className = 'normal'
+        var tableRow = table.insertRow(-1);
+        tableRow.className = 'normal';
 
         // Name
-        let showTitleCell = tableRow.insertCell()
-        showTitleCell.innerHTML = this.traktData[show].show.title
-        showTitleCell.className = 'bright traktShowTitle'
+        let showTitleCell = tableRow.insertCell();
+        showTitleCell.innerHTML = this.traktData[show].show.title;
+        showTitleCell.className = 'bright traktShowTitle';
 
         // Episode
-        let seasonNo = (this.traktData[show].episode.season).toLocaleString(undefined, { minimumIntegerDigits: 2 })
-        let episode = (this.traktData[show].episode.number).toLocaleString(undefined, { minimumIntegerDigits: 2 })
-        let episodeCell = tableRow.insertCell()
-        episodeCell.innerHTML = 'S' + seasonNo + 'E' + episode
+        let seasonNo = (this.traktData[show].episode.season).toLocaleString(undefined, { minimumIntegerDigits: 2 });
+        let episode = (this.traktData[show].episode.number).toLocaleString(undefined, { minimumIntegerDigits: 2 });
+        let episodeCell = tableRow.insertCell();
+        episodeCell.innerHTML = 'S' + seasonNo + 'E' + episode;
         episodeCell.className = 'traktEpisode';
 
         // Title
         if (this.config.styling.showEpisodeTitle) {
-          let titleCell = tableRow.insertCell()
-          const episodeTitle = this.traktData[show].episode.title
-          titleCell.innerHTML = episodeTitle === null ? '' : '\'' + episodeTitle + '\''
+          let titleCell = tableRow.insertCell();
+          const episodeTitle = this.traktData[show].episode.title;
+          titleCell.innerHTML = episodeTitle === null ? '' : '\'' + episodeTitle + '\'';
           titleCell.className = "traktTitle";
         }
         // Airtime
-        var airtime
+        var airtime;
         if (this.config.styling.daysUntil) {
           airtime = moment.utc(this.traktData[show].episode.first_aired).local().calendar(moment.utc().local(), {
             sameDay: '[' + this.translate('TODAY') + '] ' + this.config.styling.daysUntilFormat,
             nextDay: '[' + this.translate('TOMORROW') + '] ' + this.config.styling.daysUntilFormat,
             nextWeek: this.config.styling.dateFormat,
             sameElse: this.config.styling.dateFormat
-          })
+          });
         } else {
-          airtime = moment.utc(this.traktData[show].episode.first_aired).local().format(this.config.styling.dateFormat)
+          airtime = moment.utc(this.traktData[show].episode.first_aired).local().format(this.config.styling.dateFormat);
         }
-        let airtimeCell = tableRow.insertCell()
-        airtimeCell.innerHTML = airtime
+        let airtimeCell = tableRow.insertCell();
+        airtimeCell.innerHTML = airtime;
         airtimeCell.className = 'light traktAirtime';
       }
-      wrapper.appendChild(table)
+      wrapper.appendChild(table);
     }
-    return wrapper
+    return wrapper;
 	},
 	updateTrakt: function() {
 		var self = this;
@@ -138,7 +138,7 @@ Module.register("MMM-trakt", {
       self.updateTrakt();
       setInterval(function () {
         self.updateTrakt();
-      }, self.config.updateInterval)
+      }, self.config.updateInterval);
 		}, delay);
 	},
 
