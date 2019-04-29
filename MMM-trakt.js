@@ -59,7 +59,7 @@ Module.register("MMM-trakt", {
       table.className = this.config.styling.moduleSize + " traktHeader";
       for (let show in this.traktData) {
 				let date = moment.utc(this.traktData[show].episode.first_aired).local();
-				if(date.isBetween(moment(), moment().add(this.config.days, "d"), 'days', '[]')){
+				if(date.isBetween(moment(), moment().add(this.config.days-1, "d"), 'days', '[]')){
 	        let tableRow = table.insertRow(-1);
 	        tableRow.className = 'normal';
 

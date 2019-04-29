@@ -3,5 +3,7 @@
   "SEASON": "시즌",
   "NUMBER": "번호",
   "EPTITLE": "제목",
-  "TIME": "시간"
+  "TIME": "시간",
+  "TODAY": "오늘",
+  "TOMORROW": "내일"
 }

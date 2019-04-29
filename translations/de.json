@@ -3,5 +3,7 @@
   "SEASON": "Season",
   "NUMBER": "Nummer",
   "EPTITLE": "Episoden Titel",
-  "TIME": "Sendezeit"
+  "TIME": "Sendezeit",
+  "TODAY": "Heute",
+  "TOMORROW": "Morgen"
 }
