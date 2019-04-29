@@ -58,45 +58,47 @@ Module.register("MMM-trakt", {
       var table = document.createElement('table');
       table.className = this.config.styling.moduleSize + " traktHeader";
       for (var show in this.traktData) {
-        var tableRow = table.insertRow(-1);
-        tableRow.className = 'normal';
+				if(moment.utc(this.traktData[show].episode.first_aired).local().format("DD")===moment().format("DD")){
+	        var tableRow = table.insertRow(-1);
+	        tableRow.className = 'normal';
 
-        // Name
-        let showTitleCell = tableRow.insertCell();
-        showTitleCell.innerHTML = this.traktData[show].show.title;
-        showTitleCell.className = 'bright traktShowTitle';
+	        // Name
+	        let showTitleCell = tableRow.insertCell();
+	        showTitleCell.innerHTML = this.traktData[show].show.title;
+	        showTitleCell.className = 'bright traktShowTitle';
 
-        // Episode
-        let seasonNo = (this.traktData[show].episode.season).toLocaleString(undefined, { minimumIntegerDigits: 2 });
-        let episode = (this.traktData[show].episode.number).toLocaleString(undefined, { minimumIntegerDigits: 2 });
-        let episodeCell = tableRow.insertCell();
-        episodeCell.innerHTML = 'S' + seasonNo + 'E' + episode;
-        episodeCell.className = 'traktEpisode';
+	        // Episode
+	        let seasonNo = (this.traktData[show].episode.season).toLocaleString(undefined, { minimumIntegerDigits: 2 });
+	        let episode = (this.traktData[show].episode.number).toLocaleString(undefined, { minimumIntegerDigits: 2 });
+	        let episodeCell = tableRow.insertCell();
+	        episodeCell.innerHTML = 'S' + seasonNo + 'E' + episode;
+	        episodeCell.className = 'traktEpisode';
 
-        // Title
-        if (this.config.styling.showEpisodeTitle) {
-          let titleCell = tableRow.insertCell();
-          const episodeTitle = this.traktData[show].episode.title;
-          titleCell.innerHTML = episodeTitle === null ? '' : '\'' + episodeTitle + '\'';
-          titleCell.className = "traktTitle";
-        }
-        // Airtime
-        var airtime;
-        if (this.config.styling.daysUntil) {
-          airtime = moment.utc(this.traktData[show].episode.first_aired).local().calendar(moment.utc().local(), {
-            sameDay: '[' + this.translate('TODAY') + '] ' + this.config.styling.daysUntilFormat,
-            nextDay: '[' + this.translate('TOMORROW') + '] ' + this.config.styling.daysUntilFormat,
-            nextWeek: this.config.styling.dateFormat,
-            sameElse: this.config.styling.dateFormat
-          });
-        } else {
-          airtime = moment.utc(this.traktData[show].episode.first_aired).local().format(this.config.styling.dateFormat);
-        }
-        let airtimeCell = tableRow.insertCell();
-        airtimeCell.innerHTML = airtime;
-        airtimeCell.className = 'light traktAirtime';
-      }
-      wrapper.appendChild(table);
+	        // Title
+	        if (this.config.styling.showEpisodeTitle) {
+	          let titleCell = tableRow.insertCell();
+	          const episodeTitle = this.traktData[show].episode.title;
+	          titleCell.innerHTML = episodeTitle === null ? '' : '\'' + episodeTitle + '\'';
+	          titleCell.className = "traktTitle";
+	        }
+	        // Airtime
+	        var airtime;
+	        if (this.config.styling.daysUntil) {
+	          airtime = moment.utc(this.traktData[show].episode.first_aired).local().calendar(moment.utc().local(), {
+	            sameDay: '[' + this.translate('TODAY') + '] ' + this.config.styling.daysUntilFormat,
+	            nextDay: '[' + this.translate('TOMORROW') + '] ' + this.config.styling.daysUntilFormat,
+	            nextWeek: this.config.styling.dateFormat,
+	            sameElse: this.config.styling.dateFormat
+	          });
+	        } else {
+	          airtime = moment.utc(this.traktData[show].episode.first_aired).local().format(this.config.styling.dateFormat);
+	        }
+	        let airtimeCell = tableRow.insertCell();
+	        airtimeCell.innerHTML = airtime;
+	        airtimeCell.className = 'light traktAirtime';
+	      }
+	      wrapper.appendChild(table);
+			}
     }
     return wrapper;
 	},

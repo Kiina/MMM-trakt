@@ -53,8 +53,8 @@ module.exports = NodeHelper.create({
             self.log(importtoken);
             self.debugLog(trakt);
             trakt.calendars.my.shows({
-                start_date: moment.utc().format("YYYY-MM-DD"),
-                days: days,
+                start_date: moment().subtract(1, 'd').format("YYYY-MM-DD"),
+                days: days+2,
                 extended: 'full'
             }).then(shows => {
                 self.sendSocketNotification("SHOWS", {
