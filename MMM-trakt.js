@@ -49,17 +49,18 @@ Module.register("MMM-trakt", {
 	},
 
 	getDom: function() {
-    var wrapper = document.createElement('div');
+    let wrapper = document.createElement('div');
     if (Object.keys(this.traktData).length === 0 && this.traktCode === undefined) {
       wrapper.innerHTML = 'Error loading module. Please check the logs.';
     } else if (Object.keys(this.traktData).length === 0) {
       wrapper.innerHTML = 'Please enter the following on https://trakt.tv/activate: ' + this.traktCode;
     } else {
-      var table = document.createElement('table');
+      let table = document.createElement('table');
       table.className = this.config.styling.moduleSize + " traktHeader";
-      for (var show in this.traktData) {
-				if(moment.utc(this.traktData[show].episode.first_aired).local().format("DD")===moment().format("DD")){
-	        var tableRow = table.insertRow(-1);
+      for (let show in this.traktData) {
+				let date = moment.utc(this.traktData[show].episode.first_aired).local();
+				if(date.isBetween(moment(), moment().add(this.config.days, "d"), 'days', '[]')){
+	        let tableRow = table.insertRow(-1);
 	        tableRow.className = 'normal';
 
 	        // Name
