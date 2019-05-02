@@ -69,8 +69,10 @@ Module.register("MMM-trakt", {
 	        showTitleCell.className = 'bright traktShowTitle';
 
 	        // Episode
-	        let seasonNo = (this.traktData[show].episode.season).toLocaleString(undefined, { minimumIntegerDigits: 2 });
-	        let episode = (this.traktData[show].episode.number).toLocaleString(undefined, { minimumIntegerDigits: 2 });
+	        let seasonNo = (this.traktData[show].episode.season);
+	        let episode = (this.traktData[show].episode.number);
+	        seasonNo = seasonNo <= 9 ? seasonNo.toLocaleString(undefined, { minimumIntegerDigits: 2 }) : seasonNo.toString();
+					episode = episode <= 9 ? episode.toLocaleString(undefined, { minimumIntegerDigits: 2 }) : episode.toString();
 	        let episodeCell = tableRow.insertCell();
 	        episodeCell.innerHTML = 'S' + seasonNo + 'E' + episode;
 	        episodeCell.className = 'traktEpisode';
