@@ -54,7 +54,8 @@ Module.register("MMM-trakt", {
     if (Object.keys(this.traktData).length === 0 && this.traktCode === undefined) {
       wrapper.innerHTML = 'Error loading module. Please check the logs.';
     } else if (Object.keys(this.traktData).length === 0) {
-      wrapper.innerHTML = 'Please enter the following on https://trakt.tv/activate: ' + this.traktCode;
+      wrapper.innerHTML = 'Please enter the following on https://trakt.tv/activate: ' + this.traktCode
+				+ '<br> Or scan the following QR Code: <br> <img src="/modules/MMM-trakt/qr-code.svg" alt="QR Code" height="15%" width="15%">';
     } else {
       let table = document.createElement('table');
       table.className = this.config.styling.moduleSize + " traktHeader";

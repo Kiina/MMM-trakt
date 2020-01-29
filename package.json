@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/Kiina/MMM-trakt#readme",
   "dependencies": {
-    "trakt.tv": "^7.1.0",
+    "trakt.tv": "^7.2.0",
     "trakt.tv-images": "^5.2.0"
   }
 }
