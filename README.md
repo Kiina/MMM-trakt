@@ -31,7 +31,7 @@ Clone the repository into your MagicMirror's modules folder, and install depende
 
 To run the module, you need to add the following data to your ` ~/MagicMirror/config/config.js` file:
 
-```
+```js
 {
   module: 'MMM-trakt',
   position: 'top_center', // you may choose any location
