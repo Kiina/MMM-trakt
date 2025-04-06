@@ -42,7 +42,7 @@ Module.register('MMM-trakt', {
     const self = this
     setInterval(() => {
       self.updateDom()
-    }, 1000 * 10) // 1min
+    }, 1000 * 10) // 10min
   },
   getHeader: function () {
     return this.data.header

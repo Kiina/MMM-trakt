@@ -18,14 +18,16 @@ module.exports = NodeHelper.create({
       // eslint-disable-next-line camelcase
       client_secret,
       redirect_uri: null,
-      api_url: null
+      api_url: null,
+      debug: self.debug
     }
     const trakt = new Trakt(options)
 
     function importoldtoken () {
       return new Promise((resolve, reject) => {
         try {
-          importtoken = require('./token.json')
+          const data = fs.readFileSync('./modules/MMM-trakt/token.json', 'utf8')
+          importtoken = JSON.parse(data)
           resolve()
         } catch (ex) {
           reject(ex)
@@ -33,7 +35,7 @@ module.exports = NodeHelper.create({
       })
     }
 
-    importoldtoken().catch(() => {
+    function getTraktCodes () {
       return trakt.get_codes().then(poll => {
         self.log('Trakt Access Code: ' + poll.user_code)
         self.sendSocketNotification('OAuth', {
@@ -51,6 +53,10 @@ module.exports = NodeHelper.create({
           }
         })
       })
+    }
+
+    importoldtoken().catch(() => {
+      return getTraktCodes()
     }).then(() => {
       trakt.import_token(importtoken).then(newTokens => {
         self.log(importtoken)
@@ -66,6 +72,9 @@ module.exports = NodeHelper.create({
         }).catch(error => {
           self.errorLog(error, new Error())
         })
+      }).catch(error => {
+        self.errorLog(error, new Error())
+        return getTraktCodes()
       })
     }).catch(error => {
       self.errorLog(error, new Error())
