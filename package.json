@@ -3,7 +3,8 @@
   "version": "0.4.0",
   "description": "[MagicMirror Project on Github](https://github.com/MichMich/MagicMirror/)",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --fix"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,11 @@
   },
   "homepage": "https://github.com/Kiina/MMM-trakt#readme",
   "dependencies": {
-    "trakt.tv": "^8.0.0",
+    "trakt.tv": "^8.2.0",
     "trakt.tv-images": "^5.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.24.0",
+    "neostandard": "^0.12.1"
   }
 }

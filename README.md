@@ -42,7 +42,7 @@ To run the module, you need to add the following data to your ` ~/MagicMirror/co
     days: 1, // optional, default: 1. 1 = today's episodes, 2 = today's and tomorrow's, 3 = etc...
     styling : {
         moduleSize: "small", // optional, possible value: (xsmall, small, medium, large, xlarge), default: small
-        daysUntil: false, // optional, shows 'today' and 'tomorrow' insted of date, default: false
+        daysUntil: false, // optional, shows 'today' and 'tomorrow' instead of date, default: false
         daysUntilFormat: "hh:mm", // optional, default: "hh:mm", time format after 'today'. Leave empty ("") to hide, possible values: https://momentjs.com/docs/#/displaying/format/
         dateFormat: "D.M hh:mm", // optional, default: "D.M hh:mm", possible values: https://momentjs.com/docs/#/displaying/format/
         showEpisodeTitle: true, // optional, default: true
