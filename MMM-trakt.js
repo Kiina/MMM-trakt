@@ -21,7 +21,8 @@ Module.register('MMM-trakt', {
       kr: 'translations/kr.json',
       pt: 'translations/pt.json',
       sv: 'translations/sv.json',
-      da: 'translations/da.json'
+      da: 'translations/da.json',
+      it: 'translations/it.json'
     }
   },
   getStyles: function () {
@@ -37,6 +38,7 @@ Module.register('MMM-trakt', {
     this.traktData = {}
     this.traktCode = undefined
     this.loaded = false
+    this.expired = false
     this.scheduleUpdate(this.config.initialLoadDelay)
     // Schedule update interval for ui.
     const self = this
@@ -49,11 +51,13 @@ Module.register('MMM-trakt', {
   },
   getDom: function () {
     const wrapper = document.createElement('div')
-    if (Object.keys(this.traktData).length === 0 && this.traktCode === undefined) {
-      wrapper.innerHTML = 'Error loading module. Please check the logs.'
+    if (this.expired) {
+      wrapper.innerHTML = this.translate('EXPIRED')
+    } else if (Object.keys(this.traktData).length === 0 && this.traktCode === undefined) {
+      wrapper.innerHTML = this.translate('ERROR')
     } else if (Object.keys(this.traktData).length === 0) {
-      wrapper.innerHTML = 'Please enter the following on https://trakt.tv/activate: ' +
-        this.traktCode + '<br> Or scan the following QR Code: <br> <img src="/modules/MMM-trakt/qr-code.svg" alt="QR Code" height="15%" width="15%">'
+      wrapper.innerHTML = `${this.translate('ENTERFOLLOWING')} https://trakt.tv/activate: ${this.traktCode}
+        <br> ${this.translate('SCANQRCODE')} <br> <img src="/modules/MMM-trakt/qr-code.svg" alt="QR Code" height="15%" width="15%">`
     } else {
       const table = document.createElement('table')
       table.className = this.config.styling.moduleSize + ' traktHeader'
@@ -74,7 +78,7 @@ Module.register('MMM-trakt', {
           seasonNo = seasonNo <= 9 ? seasonNo.toLocaleString(undefined, { minimumIntegerDigits: 2 }) : seasonNo.toString()
           episode = episode <= 9 ? episode.toLocaleString(undefined, { minimumIntegerDigits: 2 }) : episode.toString()
           const episodeCell = tableRow.insertCell()
-          episodeCell.innerHTML = 'S' + seasonNo + 'E' + episode
+          episodeCell.innerHTML = `S${seasonNo}E${episode}`
           episodeCell.className = 'traktEpisode'
 
           // Title
@@ -88,10 +92,10 @@ Module.register('MMM-trakt', {
           let airtime
           if (this.config.styling.daysUntil) {
             airtime = moment.utc(this.traktData[show].episode.first_aired).local().calendar(moment.utc().local(), {
-              sameDay: '[' + this.translate('TODAY') + '] ' + this.config.styling.daysUntilFormat,
-              nextDay: '[' + this.translate('TOMORROW') + '] ' + this.config.styling.daysUntilFormat,
-              nextWeek: this.config.styling.dateFormat,
-              sameElse: this.config.styling.dateFormat
+              sameDay: `${this.translate('TODAY')} ${this.config.styling.daysUntilFormat}`,
+              nextDay: `${this.translate('TOMORROW')} ${this.config.styling.daysUntilFormat}`,
+              nextWeek: `${this.config.styling.dateFormat}`,
+              sameElse: `${this.config.styling.dateFormat}`
             })
           } else {
             airtime = moment.utc(this.traktData[show].episode.first_aired).local().format(this.config.styling.dateFormat)
@@ -133,6 +137,11 @@ Module.register('MMM-trakt', {
       this.traktCode = payload.code
       this.updateDom()
     }
+    if (notification === 'TokenExpired') {
+      this.expired = true
+      this.traktCode = undefined
+      this.updateDom()
+    }
   },
   scheduleUpdate: function (delay) {
     if (typeof delay === 'undefined' && delay < 0) {
@@ -147,11 +156,11 @@ Module.register('MMM-trakt', {
     }, delay)
   },
   log: function (msg) {
-    Log.log('[' + (new Date(Date.now())).toLocaleTimeString() + '] - ' + this.name + ' - : ', msg)
+    Log.log(`[${new Date(Date.now()).toLocaleTimeString()}] - ${this.name} - : `, msg)
   },
   debugLog: function (msg) {
     if (this.config.debug) {
-      Log.log('[' + (new Date(Date.now())).toLocaleTimeString() + '] - DEBUG - ' + this.name + ' - : ', msg)
+      Log.log(`[${new Date(Date.now()).toLocaleTimeString()}] - DEBUG - ${this.name} - : `, msg)
     }
   }
 })

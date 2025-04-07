@@ -5,5 +5,9 @@
   "EPTITLE": "Episoden Titel",
   "TIME": "Sendezeit",
   "TODAY": "Heute",
-  "TOMORROW": "Morgen"
+  "TOMORROW": "Morgen",
+  "EXPIRED": "Token nach 10 Minuten abgelaufen. Bitte MagicMirror neustarten oder neuladen",
+  "ERROR": "Fehler beim Laden des Moduls. Bitte Logs prüfen.",
+  "ENTERFOLLOWING": "Folgenden Code eingeben auf",
+  "SCANQRCODE": "Oder den folgenden QR Code scannen:"
 }

@@ -5,5 +5,9 @@
   "EPTITLE": "제목",
   "TIME": "시간",
   "TODAY": "오늘",
-  "TOMORROW": "내일"
+  "TOMORROW": "내일",
+  "EXPIRED": "토큰이 10분 후 만료되었습니다. MagicMirror를 다시 시작하거나 새로 고침해 주세요.",
+  "ERROR": "모듈을 불러오는 중 오류가 발생했습니다. 로그를 확인해 주세요.",
+  "ENTERFOLLOWING": "다음 코드를 다음 위치에 입력해 주세요",
+  "SCANQRCODE": "또는 다음 QR 코드를 스캔해 주세요:"
 }

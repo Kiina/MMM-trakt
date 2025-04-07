@@ -52,6 +52,11 @@ module.exports = NodeHelper.create({
             return self.errorLog(err, new Error())
           }
         })
+      }).catch(error => {
+        if (error.message === 'Expired') {
+          self.sendSocketNotification('TokenExpired', {})
+        }
+        return Promise.reject(error)
       })
     }
 
@@ -87,15 +92,15 @@ module.exports = NodeHelper.create({
     }
   },
   log: function (msg) {
-    console.log('[' + (new Date(Date.now())).toLocaleTimeString() + '] - ' + this.name + ' - : ', msg)
+    console.log(`[${(new Date(Date.now())).toLocaleTimeString()}] - ${this.name} - : `, msg)
   },
   debugLog: function (msg) {
     if (this.debug) {
-      console.log('[' + (new Date(Date.now())).toLocaleTimeString() + '] - DEBUG - ' + this.name + ' - : ', msg)
+      console.log(`[${(new Date(Date.now())).toLocaleTimeString()}] - DEBUG - ${this.name} - : `, msg)
     }
   },
   errorLog: function (error, errorObject) {
     const stack = errorObject.stack.toString().split(/\r\n|\n/) // Line number
-    console.log('[' + (new Date(Date.now())).toLocaleTimeString() + '] - ERROR ' + this.name + ' : ', error, ' - [' + stack[1] + ']')
+    console.log(`[${(new Date(Date.now())).toLocaleTimeString()}] - ERROR ${this.name} : ${error} - [${stack[1]}]`)
   }
 })
