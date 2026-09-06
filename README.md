@@ -1,5 +1,13 @@
 # [Trakt.tv]-Module for the [MagicMirror](https://github.com/MichMich/MagicMirror/)
-_If you'd like to contribute, pull requests are welcome!_
+
+## Archived / No Longer Maintained
+
+> **⚠️ This project is archived and is no longer maintained.**
+
+Due to the continued enshittification of Trakt.tv, I've decided to no longer support or develop this project.
+
+The repository will remain available for historical reference and for anyone who wishes to fork the project and continue development independently.
+
 
 ![Screenshot](screenshot.png)
 
